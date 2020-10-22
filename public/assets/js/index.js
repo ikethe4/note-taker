@@ -12,7 +12,13 @@ const getNotes = () => {
   return $.ajax({
     url: "/api/notes",
     method: "GET",
+    success: function(data){
+      console.log(data)
+    }
+  }).catch(function(err){
+    console.log(err)
   });
+  
 };
 
 // A function for saving a note to the db
@@ -150,3 +156,4 @@ $noteText.on("keyup", handleRenderSaveBtn);
 
 // Gets and renders the initial list of notes
 getAndRenderNotes();
+
