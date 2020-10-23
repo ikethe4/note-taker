@@ -11,9 +11,6 @@ app.use(express.json());
 //allows easy acces to public folder
 app.use(express.static("public"));
 
-app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname, "./public/index.html"))
-});
 
 //get returns
 app.get("/notes", function (req, res) {
@@ -61,13 +58,17 @@ app.delete("/api/notes/:id", function (req, res) {
         // console.log("index " + i)
         if (arrBank[i].id == id) {
             console.log("Note deleted: " + JSON.stringify(arrBank[i]));
-            arrBank.splice(i, 1)
+            arrBank.splice(i, 1)        
             break;
         }
     }
     fs.writeFileSync("./db/db.json", JSON.stringify(arrBank), "utf8");
     res.json(arrBank);
 })
+
+app.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname, "./public/index.html"))
+});
 
 //DO NOT KNOW WHERE TO START WITH THIS ONE
 // app.delete("/api/notes/:id", callback)  
